@@ -8,9 +8,13 @@ def map_digits(dig):
 	return numerals[dig]
 
 def unmap_digits(dig):
-	if ord(dig) >= 48 and ord(dig) <= 57:
+	if ord(dig) >= 48 and ord(dig) <= 57: # numeral
 		dig = int(dig)
-	return numerals.index(dig)
+	elif ord(dig) >= 97 and ord(dig) <= 122: # lowercase alphabet
+		# convert to uppercase
+	
+	if ord(dig) >= 65 and ord(dig) <= 90 # uppercase alphabet
+		return numerals.index(dig)
 
 def min_base(inputNum):
 	base = 2
