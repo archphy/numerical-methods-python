@@ -3,6 +3,7 @@ numerals = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \
 			'H', 'I', 'J', 'K', 'L', 'M', 'N',\
 			'O', 'P', 'Q', 'R', 'S', 'T', 'U',\
 			'V', 'W', 'X', 'Y' ,'Z']
+
 def map_digits(dig):
 	return numerals[dig]
 
@@ -10,6 +11,15 @@ def unmap_digits(dig):
 	if ord(dig) >= 48 and ord(dig) <= 57:
 		dig = int(dig)
 	return numerals.index(dig)
+
+def min_base(inputNum):
+	base = 2
+	inputNumLength = len(inputNum)
+	for i in xrange(inputNumLength-1, -1, -1):
+		minDigBase = unmap_digits(inputNum[i])
+		if  (minDigBase+1) > base:
+			base = minDigBase+1
+	return base
 
 def convert_to_decimal(inputNum, inputBase):
 	inputNumLength = len(inputNum)
@@ -65,14 +75,56 @@ def test_all():
 	print '10 from base-2 to base-10:', base_change('10', 2, 10)
 	print '7B from base-16 to base-10:', base_change('7B', 16, 10)
 	print '=========='
+	print '=====Testing min_base====='
+	print 'min_base of 1010:', min_base('1010')
+	print 'min_base of 13SFR:', min_base('13SFR')
+	print 'min_base of 13SFZ:', min_base('13SFZ')
+	print '=========='
 	
 # test_all()
 
-inputNum = raw_input('Enter the number to be converted: ')
-inputBase = int(raw_input('Enter the base of the input: '))
-outputBase = int(raw_input('Enter the desired base of the output: '))
+#check if integer
+def isInt(num):
+	try:
+		int(num)
+		return True
+	except ValueError:
+		return False
 
-print '----------'
-print 'You wanted', inputNum, 'of base:', inputBase, 'to be converted to base:', outputBase
-print 'Answer: ', base_change(inputNum, inputBase, outputBase)
-print '----------'
+def accept_inputNum():
+	global inputNum
+	inputNum = raw_input('Enter the number to be converted: ')
+	while not isInt(inputNum):
+		print 'The number should be an integer'
+		inputNum = raw_input('Enter the number to be converted: ')
+
+def accept_inputBase():
+	global inputBase
+	inputBase = int(raw_input('Enter the base of the input: '))
+	minInputBase = min_base(inputNum)
+	while (inputBase < minInputBase or inputBase > 36) \
+		or not isInt(inputBase):
+		print 'The base should range from', minInputBase, 'to 36 and should be an integer'
+		inputBase = int(raw_input('Enter the base of the input: '))
+
+def accept_outputBase():
+	global outputBase, inputBase
+	outputBase = int(raw_input('Enter the desired base of the output: '))
+	while (outputBase < 2 or outputBase > 36) \
+		or not isInt(outputBase) \
+		or inputBase == outputBase:
+		print 'The base should range from 2 to 36, should be an integer and should be different from input-base'
+		outputBase = int(raw_input('Enter the base of the input: '))
+
+def accept_inputs():
+	accept_inputNum()
+	accept_inputBase()
+	accept_outputBase()
+
+def execute_base_change():
+	print '----------'
+	print 'You wanted', inputNum, 'of base:', inputBase, 'to be converted to base:', outputBase
+	print 'Answer: ', base_change(inputNum, inputBase, outputBase)
+
+accept_inputs()
+execute_base_change()
