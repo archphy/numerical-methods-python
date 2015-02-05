@@ -56,6 +56,7 @@ def isInt(num):
 		return False
 
 def invalid_inputNum(num):
+	# use regex to catch invalid characters
 	try:
 		num.index('.')
 		return True
