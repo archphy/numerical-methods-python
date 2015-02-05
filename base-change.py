@@ -55,9 +55,19 @@ def isInt(num):
 	except ValueError:
 		return False
 
+def invalid_inputNum(num):
+	try:
+		num.index('.')
+		return True
+	except ValueError:
+		return False
+
 def accept_inputNum():
 	global inputNum
 	inputNum = raw_input('Enter the number to be converted: ')
+	while invalid_inputNum(inputNum):
+		print 'Enter a valid number'
+		inputNum = raw_input('Enter the number to be converted: ')
 
 def accept_inputBase():
 	global inputBase
