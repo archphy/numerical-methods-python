@@ -36,7 +36,7 @@ def solve(a,b):
 	# print "Partially pivoted:\n", p
 	p = transform_to_identity(p)
 	print 'Transformed to identity form:\n', p
-	q = backward_substitution(p)
+	q = ge.backward_substitution(p)
 	print "On backward substitution:\n", q
 	# q = abstract_solution(p)
 	# print "On abstracting solution:\n", q
