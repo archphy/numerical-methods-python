@@ -1,6 +1,6 @@
 # algorithm#1
 
-from numpy import matrix
+from numpy import array
 import matrix_operations as mo
 # row scaling of the matrix
 def row_scaling(a):
@@ -31,6 +31,6 @@ def solve(a,b):
 
 # test
 A = array([[2,3,-1],[4,4,-3],[-2,1,-1]])
-B = array([5,3,-3]).transpose()
-# solve(A,B)
-print B
+B = mo.transpose(array([5,3,-3]))
+solve(A,B)
+# print B
