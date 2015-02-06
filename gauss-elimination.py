@@ -30,6 +30,7 @@ def solve(a,b):
 	# print p
 
 # test
-A = matrix([[2,3,-1],[4,4,-3],[-2,1,-1]])
-B = matrix([5,3,-3]).transpose()
-solve(A,B)
+A = array([[2,3,-1],[4,4,-3],[-2,1,-1]])
+B = array([5,3,-3]).transpose()
+# solve(A,B)
+print B
