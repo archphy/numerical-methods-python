@@ -35,13 +35,40 @@ def matrix_check_orthogonal(a):
 def matrix_check_singular(a):
 	pass
 
+# matrix equality
+def matrix_equality(a,b):
+	c = (a==b)
+	for k in c:
+		for j in k:
+			if not j:
+				return False
+	return True
+
+def testing_function(a,b):
+	if a==b:
+		print 'Passed _/'
+	else:
+		print 'Failed X'
+
 def test_all():
+	a = array([[1,2],[3,4]])
+	b = array([[1,3],[5,7]])
+	c = array([[11,17],[23,37]])
+	d = array([[11,17],[23,37]])
+	print 'Testing: matrix_equality ->', testing_function(matrix_equality(c,d), True)
+	print 'Testing: matrix_equality ->', testing_function(matrix_equality(c,a), False)
+	print 'Testing: matrix_product ->', testing_function(matrix_equality(matrix_product(a, b), c), True)
 	# a = array([[3,4,5,2], [4,2,7,9]])
 	# a = a.transpose()
-	# print a
+	# b = array([[1,2],[3,4]])
+	# print b[0][0]
+	# print b[0][1]
+	# print b[1][0]
+	# print b[1][1]
 	A = matrix('1 2;3 4')
-	B = matrix('1 3;2 4')
-	print A.T == B
-	pass
+	B = matrix('1 3;5 7')
+	C = matrix('11 17;23 37')
+	# print 'Testing: matrix_product ->', testing_function(matrix_equality(matrix_product(A, B), C), True)
+	print A*B==C
 
 test_all()
