@@ -1,6 +1,7 @@
 # algorithm#1
 
 from numpy import array
+from numpy import zeros
 import matrix_operations as mo
 # row scaling of the matrix
 def row_scaling(a):
@@ -34,7 +35,23 @@ def transform_to_row_echleon(a):
 
 # backward substitution
 def backward_substitution(a):
-	pass
+	# currently supports only (n x n+1) matrix
+	n = a.shape[0]
+	p = zeros(n)
+	sum_of_others = 0
+
+	# last variable
+	p[-1] = a[-1][-1] / a[-1][-2];
+	
+	# other variables
+	for i in xrange(n-2,-1,-1):
+		for j in xrange(n-1,i,-1):
+			sum_of_others += a[i][j]*p[j]
+		
+		p[i] = (a[i][n] - sum_of_others) / a[i][i]
+		sum_of_others = 0
+	
+	return mo.transpose(p)
 
 # inverse
 def inverse(a):
@@ -56,7 +73,9 @@ def solve(a,b):
 	print "On backward substitution:\n", q
 
 # test
-A = array([[2,3,-1],[4,4,-3],[-2,1,-1]])
-B = mo.transpose(array([5,3,-3]))
+# A = array([[2,3,-1],[4,4,-3],[-2,1,-1]])
+# B = mo.transpose(array([5,3,-3]))
+A = array([[4,1],[1,3]])
+B = mo.transpose(array([1,2]))
 solve(A,B)
 # print B
