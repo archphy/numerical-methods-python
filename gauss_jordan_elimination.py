@@ -16,14 +16,6 @@ def transform_to_identity(a):
 	a = ge.row_scaling(a, False)
 	return a
 
-# abstracting solution
-def abstract_solution(a):
-	n = a.shape[0]
-	p = zeros(n)
-	for i in xrange(0,n):
-		p[i] = a[i,-1]
-	return p
-
 # solve a set of equation
 def solve(a,b):
 	print "Coefficients:\n", a
@@ -38,8 +30,6 @@ def solve(a,b):
 	print 'Transformed to identity form:\n', p
 	q = ge.backward_substitution(p)
 	print "On backward substitution:\n", q
-	# q = abstract_solution(p)
-	# print "On abstracting solution:\n", q
 
 # test
 A = array([[2,3,-1],[4,4,-3],[-2,1,-1]])
