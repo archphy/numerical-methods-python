@@ -1,5 +1,7 @@
-from numpy import matrix
+# algorithm#1
 
+from numpy import matrix
+import matrix_operations as mo
 # row scaling of the matrix
 def row_scaling(a):
 	pass
@@ -9,7 +11,7 @@ def partial_pivoting(a):
 	pass
 
 # transformation to row-echleon form
-def transform_to_row_echleon():
+def transform_to_row_echleon(a):
 	pass
 
 # backward substitution
@@ -22,7 +24,10 @@ def inverse(a):
 
 # solve a set of equation
 def solve(a,b):
-	pass
+	p = mo.augmented_matrix(a,b)
+	print 'Augmented:\n', p
+	# p = transform_to_row_echleon(p)
+	# print p
 
 # test
 A = matrix([[2,3,-1],[4,4,-3],[-2,1,-1]])
