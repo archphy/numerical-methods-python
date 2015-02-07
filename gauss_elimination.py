@@ -2,6 +2,7 @@
 
 from numpy import array
 from numpy import zeros
+from numpy import identity
 import matrix_operations as mo
 # row scaling of the matrix
 def row_scaling(a,take_abs=True):
@@ -24,14 +25,19 @@ def partial_pivoting(a):
 	pass
 
 # transformation to row-echleon form
-def transform_to_row_echleon(a):
+def transform_to_row_echleon(a, want_factors=False):
 	n = a.shape[0]
-	for i in xrange(0,n-1):
+	factor_lt_array = identity(n)
+	for i in xrange(0,n):
 		for j in xrange(i+1,n):
-			factor = a[j][i]/a[i][i]
-			for k in xrange(0,n+1):
-				a[j][k] -= factor*a[i][k]
-	return a
+			factor_lt_array[j][i] = a[j][i]/a[i][i]
+			for k in xrange(0,a.shape[1]):
+				a[j][k] -= factor_lt_array[j][i]*a[i][k]
+	
+	if want_factors:
+		return (factor_lt_array,a)
+	else:
+		return a
 
 # backward substitution
 def backward_substitution(a):
