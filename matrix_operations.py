@@ -100,6 +100,15 @@ def augmented_matrix(a,b):
 	else:
 		print 'check dimensions of the input arrays'
 
+# swapping rows
+def swap_rows(a,i,j):
+	n = a.shape[1]
+	for k in xrange(n):
+		temp = a[i][k]
+		a[i][k] = a[j][k]
+		a[j][k] = temp
+	return a
+
 def testing_function(a,b):
 	if a==b:
 		print 'Passed _/'
