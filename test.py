@@ -1,3 +1,9 @@
+import matrix_operations as mo
+import gauss_elimination as ge
+import dolittle_decompostion as dd
+from numpy import array
+from numpy import zeros
+
 # # 5-Feb-2015
 # def join_list(a):
 # 	s = ""

@@ -1,7 +1,7 @@
 # algorithm#3.1
 
-import gauss_elimination as ge
 import matrix_operations as mo
+import gauss_elimination as ge
 from numpy import array
 from numpy import zeros
 
