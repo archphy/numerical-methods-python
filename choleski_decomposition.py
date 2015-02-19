@@ -3,7 +3,7 @@
 # tasks left:
 # 1. check for symmetry 				done
 # 2. check for NxN						done
-# 3. minimize storage
+# 3. minimize storage					done
 # 4. bring all functions in one program	done
 # 5. check for positive definite 		done
 # 6. solve a test case 					done
@@ -103,34 +103,31 @@ def backward_substitution(a):
 
 def choleski_decomposition():
 	global A,B,n
-	l = identity(n)
 	sum_1 = 0
 	sum_2 = 0
 	for i in xrange(n):
 		for j in xrange(i):
 			for k in xrange(j):
-				sum_1 += l[j][k]*l[i][k]
-			l[i][j] = (A[i][j] - sum_1) / l[j][j]
+				sum_1 += A[j][k]*A[i][k]
+			A[i][j] = (A[i][j] - sum_1) / A[j][j]
+			A[j][i] = A[i][j]
 		
-		for k in xrange(i):
-			sum_2 += l[i][k]*l[i][k]
+		for j in xrange(i):
+			sum_2 += A[i][j]*A[i][j]
 		
-		l[i][i] = sqrt(A[i][i] - sum_2)
-		sum_1 = 0
-		sum_2 = 0
-	
-	return l
+		A[i][i] = sqrt(A[i][i] - sum_2)
+		sum_1 = sum_2 = 0
 
 def solve():
 	global A,B
 	if not check_positive_definite(A):
 		print 'A matrix must be positive definite'
 	else:
-		l = choleski_decomposition()
-		u = transpose(l)
-		y = forward_substitution(l,B)
-		s = backward_substitution(augmented_matrix(u,y))
+		choleski_decomposition()
+		y = forward_substitution(A,B)
+		s = backward_substitution(augmented_matrix(A,y))
 		print s
+		print 'Modified A matrix:\n', A
 		# print 'Lower triangular matrix:\n', l
 		# print 'Upper triangular matrix:\n', u
 		# print 'On forward substitution:\n', y
@@ -157,15 +154,15 @@ def accept_values():
 
 
 def accept_inputs():
-	# accept_coefficients()
-	# accept_values()
-	# print 'Number of variables:', n
-	# print 'A matrix\n', A
-	# print 'B matrix\n', B
-	global A,B,n
-	A = array([[1.44,-0.36,5.52,0],[-0.36,10.33,-7.78,0],[5.52,-7.78,28.4,9],[0,0,9,61]], dtype="float")
-	B = transpose(array([0.04,-2.15,0,0.88]))
-	n = 4
+	accept_coefficients()
+	accept_values()
+	print 'Number of variables:', n
+	print 'A matrix\n', A
+	print 'B matrix\n', B
+	# global A,B,n
+	# A = array([[1.44,-0.36,5.52,0],[-0.36,10.33,-7.78,0],[5.52,-7.78,28.4,9],[0,0,9,61]], dtype="float")
+	# B = transpose(array([0.04,-2.15,0,0.88]))
+	# n = 4
 	# print check_positive_definite(A)
 
 accept_inputs()
