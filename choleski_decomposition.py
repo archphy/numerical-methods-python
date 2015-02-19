@@ -82,22 +82,22 @@ def forward_substitution(a,b):
 		sum_of_others = 0
 	return x
 
-def backward_substitution(a):
+def backward_substitution(a,b):
 	# currently supports only (n x n+1) matrix
 	global n
 	p = zeros(n)
-	sum_of_others = 0
+	sum_1 = 0
 
 	# last variable
-	p[-1] = a[-1][-1] / a[-1][-2];
+	p[-1] = b[-1][-1] / a[-1][-1];
 	
 	# other variables
 	for i in xrange(n-2,-1,-1):
 		for j in xrange(n-1,i,-1):
-			sum_of_others += a[i][j]*p[j]
+			sum_1 += a[i][j]*p[j]
 		
-		p[i] = (a[i][n] - sum_of_others) / a[i][i]
-		sum_of_others = 0
+		p[i] = (a[i][n] - sum_1) / a[i][i]
+		sum_1 = 0
 	
 	return transpose(p)
 
