@@ -96,7 +96,7 @@ def backward_substitution(a,b):
 		for j in xrange(n-1,i,-1):
 			sum_1 += a[i][j]*p[j]
 		
-		p[i] = (a[i][n] - sum_1) / a[i][i]
+		p[i] = (b[i][0] - sum_1) / a[i][i]
 		sum_1 = 0
 	
 	return transpose(p)
@@ -125,7 +125,7 @@ def solve():
 	else:
 		choleski_decomposition()
 		y = forward_substitution(A,B)
-		s = backward_substitution(augmented_matrix(A,y))
+		s = backward_substitution(A,y)
 		print s
 		print 'Modified A matrix:\n', A
 		# print 'Lower triangular matrix:\n', l
@@ -154,15 +154,15 @@ def accept_values():
 
 
 def accept_inputs():
-	accept_coefficients()
-	accept_values()
-	print 'Number of variables:', n
-	print 'A matrix\n', A
-	print 'B matrix\n', B
-	# global A,B,n
-	# A = array([[1.44,-0.36,5.52,0],[-0.36,10.33,-7.78,0],[5.52,-7.78,28.4,9],[0,0,9,61]], dtype="float")
-	# B = transpose(array([0.04,-2.15,0,0.88]))
-	# n = 4
+	# accept_coefficients()
+	# accept_values()
+	# print 'Number of variables:', n
+	# print 'A matrix\n', A
+	# print 'B matrix\n', B
+	global A,B,n
+	A = array([[1.44,-0.36,5.52,0],[-0.36,10.33,-7.78,0],[5.52,-7.78,28.4,9],[0,0,9,61]], dtype="float")
+	B = transpose(array([0.04,-2.15,0,0.88]))
+	n = 4
 	# print check_positive_definite(A)
 
 accept_inputs()
