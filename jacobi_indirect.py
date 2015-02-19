@@ -16,6 +16,9 @@ def diagonally_dominant(a):
 def solve(a,b):
 	p = diagonally_dominant(a)
 	print 'Diagonally Dominant:\n', p
+	b_1 = a
+	b_2 = b
+
 
 # test
 A = array([[2,1,9],[8,1,-1],[1,-7,2]])
